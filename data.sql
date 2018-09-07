@@ -1,5 +1,5 @@
 -- Database should be prime_feedback
-CREATE DATABASE "prime_feedback";
+CREATE DATABASE "reflection_board";
 
 -- Switch to "prime_feedback" before making:
 -- Table to store the feedback
