@@ -17,3 +17,20 @@
   font-size: large;
 }
 
+header {
+  height: 150px;
+  background-color: blue;
+}
+
+#title {
+  float: left;
+  padding: 25px;
+  margin-top: 85px;
+  background-color: aquamarine;
+}
+
+img {
+  float: right;
+  margin-top: 25px;
+  margin-right: 20px;
+}

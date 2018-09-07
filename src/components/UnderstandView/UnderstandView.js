@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Header from '../Header/Header.js';
 
 class UnderstandView extends Component {
     render() {
         return (
-            <div>Understand</div>
+            <div>
+                <Header />
+                Understand
+            </div>
         ) //end of return
     } //end of render
 } //end of UnderstandView class
