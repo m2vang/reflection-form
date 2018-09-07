@@ -7,7 +7,29 @@ class AdminView extends Component {
         return (
             <div>
                 <AdminHeader />
-                Admin
+                <br />
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feeling</th>
+                                <th>Comprehension</th>
+                                <th>Support</th>
+                                <th>Comments</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>4</td>
+                                <td>4</td>
+                                <td>4</td>
+                                <td>Cool</td>
+                                <td><button>Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         ) //end of return
     } //end of render
