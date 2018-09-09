@@ -12,7 +12,7 @@ class AdminView extends Component {
     getFeedbackHistory = () => {
         axios({
             method: 'GET',
-            url: '/addHistory'
+            url: '/feedback'
         }).then((response) => {
             const history = response.data;
             const action = {type: 'GET_HISTORY', payload: history}
@@ -23,6 +23,19 @@ class AdminView extends Component {
             console.log('Error in Get History!', error);
         }); //end of GET
     } //end of getFeedbackHistory
+
+    removeFeedback = (event) => {
+        const id = event.target.value;
+        axios({
+            method: 'DELETE',
+            url: '/feedback/' + id
+        }).then((response) => {
+            this.getFeedbackHistory();
+        }).catch((error) => {
+            alert('Unable to delete feedback!');
+            console.log('Error in remove', error);
+        }); //end of DELETE
+    } //end of remove
 
     render() {
         return (
@@ -48,7 +61,7 @@ class AdminView extends Component {
                                         <td>{feedback.understanding}</td>
                                         <td>{feedback.support}</td>
                                         <td>{feedback.comments}</td>
-                                        <td><button>Delete</button></td>
+                                        <td><button onClick={this.removeFeedback} value={feedback.id}>Delete</button></td>
                                     </tr>
                                 )
                             })}

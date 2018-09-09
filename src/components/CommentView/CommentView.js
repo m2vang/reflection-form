@@ -28,7 +28,7 @@ class CommentView extends Component {
         const feedback = this.state;
         axios({
             method: 'POST',
-            url: '/addHistory',
+            url: '/feedback',
             data: feedback
         }).then((response) => {
             const action = { type: 'CLEAR_FEEDBACK' };
