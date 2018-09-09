@@ -7,28 +7,35 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 
-const feelingReducer = (state = [], action) => {
-    console.log('reducer');
-    return state;
-}; //end of feelingReducer
+const blankFeedbacks = {
+    feedbacks: {
+        feeling: 0,
+        understanding: 0,
+        support: 0,
+        comments: ''
+    }
+}
 
-const understandReducer = (state = [], action) => {
-    console.log('understandReducer');
+const feedbackReducer = (state = blankFeedbacks, action) => {
+    if (action.type === 'ADD_FEELINGS') {
+        const newFeeling = { ...state, feeling: action.payload};
+        return newFeeling;
+    } else if (action.type === 'ADD_UNDERSTANDING') {
+        const newUnderstanding = { ...state, understanding: action.payload };
+        return newUnderstanding;
+    } else if (action.type === 'ADD_SUPPORT') {
+        const newSupport = { ...state, support: action.payload };
+        return newSupport;
+    } else if (action.type === 'ADD_COMMENT') {
+        const newComment = { ...state, comment: action.payload };
+        return newComment;
+    } else if (action.type === 'CLEAR_FEEDBACK') {
+        return blankFeedbacks;
+    }
     return state;
-}; //end of understandReducer
-
-const supportReducer = (state = [], action) => {
-    console.log('supportReducer');
-    return state;
-}; //end of supportReducer
-
-const commentReducer = (state = [], action) => {
-    console.log('commentReducer');
-    return state;
-}; //end of commentReducer
+}; //end of feedbackReducer
 
 const feedbackHistoryReducer = (state = [], action) => {
-    console.log('feedbackHistoryReducer HIT');
     if(action.type === 'GET_HISTORY') {
         const feedbackHistoryFromServer = action.payload;
         return feedbackHistoryFromServer;
@@ -39,10 +46,7 @@ const feedbackHistoryReducer = (state = [], action) => {
 const storeInstance = createStore(
     //combineReducers will allow more than one reducer
     combineReducers({
-        feelingReducer,
-        understandReducer,
-        supportReducer,
-        commentReducer,
+        feedbackReducer,
         feedbackHistoryReducer
     }),
     applyMiddleware(logger),
