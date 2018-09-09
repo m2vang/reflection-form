@@ -5,7 +5,7 @@ import UnderstandView from '../UnderstandView/UnderstandView.js';
 import SupportView from '../SupportView/SupportView.js';
 import CommentView from '../CommentView/CommentView.js';
 import ThankView from '../ThankView/ThankView.js';
-import AdminView from '../AdminView/AdminView.js';
+// import AdminView from '../AdminView/AdminView.js';
 import {HashRouter as Router, Route} from 'react-router-dom';
 
 class App extends Component {
@@ -20,7 +20,7 @@ class App extends Component {
           <Route path="/3" component={SupportView} />
           <Route path="/4" component={CommentView} />
           <Route path="/5" component={ThankView} />
-          <Route path="/admin" component={AdminView} />
+          {/* <Route path="/admin" component={AdminView} /> */}
         </div>
       </Router>
     );
