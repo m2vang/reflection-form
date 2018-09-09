@@ -4,27 +4,28 @@ import Header from '../Header/Header.js';
 import axios from 'axios';
 
 class CommentView extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            comment: '',
+            ...this.props.reduxState.feedbackReducer, comments: 'none'
         }
     } //end of constructor
 
     handleCommentChange = (event) => {
         this.setState({
-            comment: (event.target.value),
+            comments: String(event.target.value),
         })
     } //end handleFeelingChange
 
     handleSubmit = () => {
-        const action = { type: 'ADD_COMMENT', payload: this.state.comment };
+        const action = { type: 'ADD_COMMENT', payload: this.state.comments };
         this.props.dispatch(action);
         this.postFeedback();
+        this.props.history.push("/5"); //move on to next page
     } //end of handleSubmit
 
     postFeedback = () => {
-        const feedback = this.props.reduxState.feedbackReducer;
+        const feedback = this.state;
         axios({
             method: 'POST',
             url: '/addHistory',
@@ -32,7 +33,6 @@ class CommentView extends Component {
         }).then((response) => {
             const action = { type: 'CLEAR_FEEDBACK' };
             this.props.dispatch(action);
-            this.props.history.push("/5"); //move on to next page
         }).catch((error) => {
             alert('Unable to send feedback!');
             console.log('error in POST', error);

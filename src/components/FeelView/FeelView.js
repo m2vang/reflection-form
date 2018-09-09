@@ -17,7 +17,7 @@ class FeelView extends Component {
     } //end handleFeelingChange
 
     handleSubmit = () => {
-        const action ={type: 'ADD_FEELINGS', payload: this.state.feeling};
+        const action ={ type: 'ADD_FEELINGS', payload: this.state.feeling };
         this.props.dispatch(action);
         this.props.history.push("/2"); //move on to next page
     } //end of handleSubmit

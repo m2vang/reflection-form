@@ -27,7 +27,7 @@ const feedbackReducer = (state = blankFeedbacks, action) => {
         const newSupport = { ...state, support: action.payload };
         return newSupport;
     } else if (action.type === 'ADD_COMMENT') {
-        const newComment = { ...state, comment: action.payload };
+        const newComment = { ...state, comments: action.payload };
         return newComment;
     } else if (action.type === 'CLEAR_FEEDBACK') {
         return blankFeedbacks;
