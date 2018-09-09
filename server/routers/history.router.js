@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
-router.get('/addHistory', (req, res) => {
+router.get('/', (req, res) => {
     console.log('in GET-addHistory route');
     const query = `SELECT * FROM "feedback"
                     ORDER BY date DESC;`;

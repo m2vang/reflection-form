@@ -12,12 +12,12 @@ class AdminView extends Component {
     getFeedbackHistory = () => {
         axios({
             method: 'GET',
-            url: '/'
+            url: '/addHistory'
         }).then((response) => {
             const history = response.data;
             const action = {type: 'GET_HISTORY', payload: history}
             this.props.dispatch(action);
-            // console.log('Historydata:', response.data);
+            console.log('Historydata:', history);
         }).catch((error) => {
             alert('Unable to get feedback history!');
             console.log('Error in Get History!', error);
@@ -44,7 +44,7 @@ class AdminView extends Component {
                             {this.props.reduxState.feedbackHistoryReducer.map((feedback, i) => {
                                 return (
                                     <tr key={i}>
-                                        <td>{feedback.feedling}</td>
+                                        <td>{feedback.feeling}</td>
                                         <td>{feedback.understanding}</td>
                                         <td>{feedback.support}</td>
                                         <td>{feedback.comments}</td>
