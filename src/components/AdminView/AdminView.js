@@ -1,8 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AdminHeader from '../Header/AdminHeader/AdminHeader.js';
+import axios from 'axios';
 
 class AdminView extends Component {
+
+    componentDidMount() {
+        this.getFeedbackHistory();
+    } //end of componentDidMOunt
+
+    getFeedbackHistory = () => {
+        axios({
+            method: 'GET',
+            url: '/'
+        }).then((response) => {
+            const history = response.data;
+            const action = {type: 'GET_HISTORY', payload: history}
+            this.props.dispatch(action);
+            // console.log('Historydata:', response.data);
+        }).catch((error) => {
+            alert('Unable to get feedback history!');
+            console.log('Error in Get History!', error);
+        }); //end of GET
+    } //end of getFeedbackHistory
+
     render() {
         return (
             <div>
@@ -20,13 +41,18 @@ class AdminView extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>4</td>
-                                <td>4</td>
-                                <td>4</td>
-                                <td>Cool</td>
-                                <td><button>Delete</button></td>
-                            </tr>
+                            {this.props.reduxState.feedbackHistoryReducer.map((feedback, i) => {
+                                return (
+                                    <tr key={i}>
+                                        <td>{feedback.feedling}</td>
+                                        <td>{feedback.understanding}</td>
+                                        <td>{feedback.support}</td>
+                                        <td>{feedback.comments}</td>
+                                        <td><button>Delete</button></td>
+                                    </tr>
+                                )
+                            })}
+
                         </tbody>
                     </table>
                 </div>
@@ -34,5 +60,5 @@ class AdminView extends Component {
         ) //end of return
     } //end of render
 } //end of AdminView class
-
-export default connect()(AdminView);
+const mapReduxStateToProps = reduxState => ({reduxState});
+export default connect(mapReduxStateToProps)(AdminView);

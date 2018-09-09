@@ -7,30 +7,34 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 
-const feelingReducer = (state = {}, action) => {
+const feelingReducer = (state = [], action) => {
     console.log('reducer');
     return state;
 }; //end of feelingReducer
 
-const understandReducer = (state = {}, action) => {
+const understandReducer = (state = [], action) => {
     console.log('understandReducer');
     return state;
 }; //end of understandReducer
 
-const supportReducer = (state = {}, action) => {
+const supportReducer = (state = [], action) => {
     console.log('supportReducer');
     return state;
 }; //end of supportReducer
 
-const commentReducer = (state = {}, action) => {
+const commentReducer = (state = [], action) => {
     console.log('commentReducer');
     return state;
 }; //end of commentReducer
 
-const feedbackReducer = (state = {}, action) => {
-    console.log('feedbackReducer');
+const feedbackHistoryReducer = (state = [], action) => {
+    console.log('feedbackHistoryReducer HIT');
+    if(action.type === 'GET_HISTORY') {
+        const feedbackHistoryFromServer = action.payload;
+        return feedbackHistoryFromServer;
+    }
     return state;
-}; //end of feedbackReducer
+}; //end of feedbackHistoryReducer
 
 const storeInstance = createStore(
     //combineReducers will allow more than one reducer
@@ -39,7 +43,7 @@ const storeInstance = createStore(
         understandReducer,
         supportReducer,
         commentReducer,
-        feedbackReducer
+        feedbackHistoryReducer
     }),
     applyMiddleware(logger),
 ); //end of storeInstance
