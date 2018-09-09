@@ -17,7 +17,7 @@ class UnderstandView extends Component {
     } //end handleFeelingChange
 
     handleSubmit = () => {
-        const action = { type: 'ADD_UNDERSTANDING', payload: this.state };
+        const action = { type: 'ADD_UNDERSTANDING', payload: this.state.understanding };
         this.props.dispatch(action);
         this.props.history.push("/3"); //move on to next page
     } //end of handleSubmit

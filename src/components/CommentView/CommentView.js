@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../Header/Header.js';
+import axios from 'axios';
 
 class CommentView extends Component {
     constructor() {
@@ -8,7 +9,7 @@ class CommentView extends Component {
         this.state = {
             comment: '',
         }
-    }
+    } //end of constructor
 
     handleCommentChange = (event) => {
         this.setState({
@@ -17,10 +18,26 @@ class CommentView extends Component {
     } //end handleFeelingChange
 
     handleSubmit = () => {
-        const action = { type: 'ADD_COMMENT', payload: this.state };
+        const action = { type: 'ADD_COMMENT', payload: this.state.comment };
         this.props.dispatch(action);
-        this.props.history.push("/5"); //move on to next page
-    }
+        this.postFeedback();
+    } //end of handleSubmit
+
+    postFeedback = () => {
+        const feedback = this.props.reduxState.feedbackReducer;
+        axios({
+            method: 'POST',
+            url: '/addHistory',
+            data: feedback
+        }).then((response) => {
+            const action = { type: 'CLEAR_FEEDBACK' };
+            this.props.dispatch(action);
+            this.props.history.push("/5"); //move on to next page
+        }).catch((error) => {
+            alert('Unable to send feedback!');
+            console.log('error in POST', error);
+        });
+    } //end of postFeedback
 
     render() {
         return (
@@ -38,5 +55,5 @@ class CommentView extends Component {
         ) //end of return
     } //end of render
 } //end of CommentView class
-
-export default connect()(CommentView);
+const mapReduxStateToProps = reduxState => ({ reduxState });
+export default connect(mapReduxStateToProps)(CommentView);

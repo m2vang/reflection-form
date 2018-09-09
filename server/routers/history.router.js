@@ -16,4 +16,20 @@ router.get('/', (req, res) => {
     });
 }); //end of GET
 
+router.post('/', (req, res) => {
+    console.log('in POST route', req.body);
+    const newFeedback = req.body;
+    const query = `INSERT INTO "feedback" ("feeling", "understanding", "support", "comments")
+                    VALUES ($1, $2, $3, $4);`;
+    pool.query(query, [newFeedback.feeling, newFeedback.understanding, 
+                        newFeedback.support, newFeedback.comments])
+    .then((results) => {
+        console.log(results);
+        res.sendStatus(200);
+    }).catch((error) => {
+        console.log('error in POST', error);
+        res.sendStatus(500);
+    });
+}); //end of POST
+
 module.exports = router;

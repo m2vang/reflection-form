@@ -17,7 +17,7 @@ class SupportView extends Component {
     } //end handleFeelingChange
 
     handleSubmit = () => {
-        const action = { type: 'ADD_SUPPORT', payload: this.state };
+        const action = { type: 'ADD_SUPPORT', payload: this.state.support };
         this.props.dispatch(action);
         this.props.history.push("/4"); //move on to next page
     }
