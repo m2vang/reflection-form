@@ -9,6 +9,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Button from '@material-ui/core/Button';
+
+
 
 class AdminView extends Component {
 
@@ -44,9 +48,18 @@ class AdminView extends Component {
         }); //end of DELETE
     } //end of remove
 
-    flagFeedback = (event) => {
-        const id = event.target.value;
-    }
+    toggleFlagFeedback = (feedback) => {
+        console.log('flag', feedback);
+        axios({
+            method: 'PUT',
+            url: '/feedback/flag' + feedback
+        }).then((response) => {
+            //this.getFeedbackHistory();
+        }).catch((error) => {
+            alert('Unable to flag feedback!');
+            console.log('error in POST-flag', error);
+        });
+    } //end of flagFeedback
 
     render() {
         return (
@@ -63,7 +76,7 @@ class AdminView extends Component {
                                     <TableCell>Support</TableCell>
                                     <TableCell>Comments</TableCell>
                                     <TableCell>Flag for Review</TableCell>
-                                    <TableCell>Delete</TableCell>
+                                    <TableCell>Remove</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -74,12 +87,11 @@ class AdminView extends Component {
                                             <TableCell>{feedback.understanding}</TableCell>
                                             <TableCell>{feedback.support}</TableCell>
                                             <TableCell>{feedback.comments}</TableCell>
-                                            <TableCell><Checkbox unchecked={this.flagFeedback} value={feedback.id}></Checkbox></TableCell>
-                                            <TableCell><button onClick={this.removeFeedback} value={feedback.id}>Delete</button></TableCell>
+                                            <TableCell><Checkbox checked={feedback.flagged} onChange={this.toggleFlagFeedback(feedback)}></Checkbox></TableCell>
+                                            <TableCell><Button variant="contained" color="secondary" onClick={this.removeFeedback} value={feedback.id}>Delete<DeleteIcon /></Button></TableCell>
                                         </TableRow>
-                                    )
+                                    ) //end of return
                                 })}
-
                             </TableBody>
                         </Table>
                     </Paper>

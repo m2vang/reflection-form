@@ -8,7 +8,6 @@ router.get('/', (req, res) => {
                     ORDER BY id DESC;`;
     pool.query(query)
     .then((results) => {
-        console.log(results);
         res.send(results.rows);
     }).catch((error) => {
         console.log('error in GET route');
@@ -24,7 +23,6 @@ router.post('/', (req, res) => {
     pool.query(query, [newFeedback.feeling, newFeedback.understanding, 
                         newFeedback.support, newFeedback.comments])
     .then((results) => {
-        console.log(results);
         res.sendStatus(200);
     }).catch((error) => {
         console.log('error in POST route', error);
@@ -44,5 +42,18 @@ router.delete('/:id', (req, res) => {
         res.sendStatus(500);
     });
 }); //end of DELETE
+
+router.put('/:feedback', (req, res) => {
+    console.log('in PUT route', req.body);
+    const newFlagged = req.body;
+    const query = `UPDATE "feedback" SET "flagged" = $1 WHERE "id" = $2;`;
+    pool.query(query, [!newFlagged.flagged, newFlagged.id])
+    .then((results) => {
+        res.sendStatus(200);
+    }).catch((error) => {
+        console.log('error in PUT:id', error);
+        res.sendStatus(500);
+    });
+}); //end of POST:id
 
 module.exports = router;
