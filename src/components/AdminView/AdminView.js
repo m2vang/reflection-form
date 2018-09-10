@@ -11,7 +11,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
-import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 class AdminView extends Component {
@@ -45,7 +44,6 @@ class AdminView extends Component {
             alert('Unable to delete feedback!');
             console.log('Error in remove', error);
         })
-
     } //end of removeFeedback
 
     toggleFlagFeedback = (feedback) => {
@@ -62,6 +60,7 @@ class AdminView extends Component {
     } //end of flagFeedback
 
     render() {
+        let{showModal, onConfirm, hideModal, feedback} = this.props
         return (
             <div>
                 <AdminHeader />
@@ -88,7 +87,9 @@ class AdminView extends Component {
                                             <TableCell>{feedback.support}</TableCell>
                                             <TableCell>{feedback.comments}</TableCell>
                                             <TableCell><Checkbox checked={feedback.flagged} onChange={this.toggleFlagFeedback(feedback)}></Checkbox></TableCell>
-                                            <TableCell><Button variant="contained" color="secondary" onClick={this.removeFeedback} value={feedback.id}>Delete<DeleteIcon /></Button></TableCell>
+                                            {/* <TableCell><Button variant="contained" color="secondary" onClick={this.removeFeedback}>Delete<DeleteIcon /></Button></TableCell> */}
+                                            <TableCell><Button onClick={() => showModal("Are you sure you want to delete this?")}></Button> 
+                                                <ConfirmModal message =" ``" onConfirm={onConfirm} onCancel={hideModal}></ConfirmModal></TableCell>
                                         </TableRow>
                                     ) //end of return
                                 })}
