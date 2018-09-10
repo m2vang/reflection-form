@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AdminHeader from '../Header/AdminHeader/AdminHeader.js';
 import axios from 'axios';
+import Checkbox from '@material-ui/core/Checkbox';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 class AdminView extends Component {
 
@@ -15,7 +22,7 @@ class AdminView extends Component {
             url: '/feedback'
         }).then((response) => {
             const history = response.data;
-            const action = {type: 'GET_HISTORY', payload: history}
+            const action = { type: 'GET_HISTORY', payload: history }
             this.props.dispatch(action);
             console.log('Historydata:', history);
         }).catch((error) => {
@@ -37,43 +44,49 @@ class AdminView extends Component {
         }); //end of DELETE
     } //end of remove
 
+    flagFeedback = (event) => {
+        const id = event.target.value;
+    }
+
     render() {
         return (
             <div>
                 <AdminHeader />
                 <br />
                 <div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Feeling</th>
-                                <th>Comprehension</th>
-                                <th>Support</th>
-                                <th>Comments</th>
-                                <th>Flag for Review</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.props.reduxState.feedbackHistoryReducer.map((feedback, i) => {
-                                return (
-                                    <tr key={i}>
-                                        <td>{feedback.feeling}</td>
-                                        <td>{feedback.understanding}</td>
-                                        <td>{feedback.support}</td>
-                                        <td>{feedback.comments}</td>
-                                        <td></td>
-                                        <td><button onClick={this.removeFeedback} value={feedback.id}>Delete</button></td>
-                                    </tr>
-                                )
-                            })}
+                    <Paper>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Feeling</TableCell>
+                                    <TableCell>Comprehension</TableCell>
+                                    <TableCell>Support</TableCell>
+                                    <TableCell>Comments</TableCell>
+                                    <TableCell>Flag for Review</TableCell>
+                                    <TableCell>Delete</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {this.props.reduxState.feedbackHistoryReducer.map((feedback, i) => {
+                                    return (
+                                        <TableRow key={i}>
+                                            <TableCell>{feedback.feeling}</TableCell>
+                                            <TableCell>{feedback.understanding}</TableCell>
+                                            <TableCell>{feedback.support}</TableCell>
+                                            <TableCell>{feedback.comments}</TableCell>
+                                            <TableCell><Checkbox unchecked={this.flagFeedback} value={feedback.id}></Checkbox></TableCell>
+                                            <TableCell><button onClick={this.removeFeedback} value={feedback.id}>Delete</button></TableCell>
+                                        </TableRow>
+                                    )
+                                })}
 
-                        </tbody>
-                    </table>
+                            </TableBody>
+                        </Table>
+                    </Paper>
                 </div>
             </div>
         ) //end of return
     } //end of render
 } //end of AdminView class
-const mapReduxStateToProps = reduxState => ({reduxState});
+const mapReduxStateToProps = reduxState => ({ reduxState });
 export default connect(mapReduxStateToProps)(AdminView);
