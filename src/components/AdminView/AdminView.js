@@ -50,6 +50,7 @@ class AdminView extends Component {
                                 <th>Comprehension</th>
                                 <th>Support</th>
                                 <th>Comments</th>
+                                <th>Flag for Review</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
@@ -61,6 +62,7 @@ class AdminView extends Component {
                                         <td>{feedback.understanding}</td>
                                         <td>{feedback.support}</td>
                                         <td>{feedback.comments}</td>
+                                        <td></td>
                                         <td><button onClick={this.removeFeedback} value={feedback.id}>Delete</button></td>
                                     </tr>
                                 )

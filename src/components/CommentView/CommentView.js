@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../Header/Header.js';
 import axios from 'axios';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 class CommentView extends Component {
     constructor(props) {
@@ -43,14 +48,22 @@ class CommentView extends Component {
         return (
             <div>
                 <Header />
-                <div className="inputForm">
-                    <h2>Question 4 of 4:</h2>
-                    <h3>Any comments?</h3>
-                    <input type="string" onChange={this.handleCommentChange} name="comment"/>
-                </div>
-                <div>
-                    <button className="nextPage" onClick={this.handleSubmit}>Submit</button>
-                </div>
+                <Card>
+                    <CardContent>
+                        <Typography color="textSecondary">
+                            Question 4 of 4:
+                        </Typography>
+                        <Typography variant="headline" component="h2">
+                            Any comments?
+                        </Typography>
+                        <Typography color="textSecondary">
+                            <input type="string" onChange={this.handleCommentChange} name="comment" />                           
+                        </Typography>
+                    </CardContent>
+                    <CardActions>
+                        <Button size="large" className="nextPage" onClick={this.handleSubmit}>Submit</Button>
+                    </CardActions>
+                </Card>
             </div>
         ) //end of return
     } //end of render
