@@ -6,6 +6,7 @@ React.js <br>
 Redux <br>
 React-Redux <br>
 React Routing <br>
+Material-UI <br>
 PostgreSQL <br>
 Express <br>
 Node <br>
@@ -31,12 +32,13 @@ npm run client
 
 ### Completed Features <br>
 High level list of items completed: <br>
-- [] <br>
-- [] <br>
+- [Allow admins to delete feedbacks] <br>
+- [Answers are saved in the redux store until they are submitted, which will then push the data into the database] <br>
 
 ### Next Steps: <br>
-- [] <br>
-- [] <br>
+- [Deletion warning when deleting feedbacks popup] <br>
+- [Fix bug on flagging feedback feature] <br>
+- [Ability to sort feedbacks by their categories] <br>
 
 ## Authors: <br>
 Mai Chee Vang <br>

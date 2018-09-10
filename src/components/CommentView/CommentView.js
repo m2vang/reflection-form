@@ -61,7 +61,7 @@ class CommentView extends Component {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button size="large" className="nextPage" onClick={this.handleSubmit}>Submit</Button>
+                        <Button variant="contained" color="primary" size="large" className="nextPage" onClick={this.handleSubmit}>Submit</Button>
                     </CardActions>
                 </Card>
             </div>

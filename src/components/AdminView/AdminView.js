@@ -11,11 +11,10 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
-
-
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 class AdminView extends Component {
-
     componentDidMount() {
         this.getFeedbackHistory();
     } //end of componentDidMOunt
@@ -36,7 +35,7 @@ class AdminView extends Component {
     } //end of getFeedbackHistory
 
     removeFeedback = (event) => {
-        const id = event.target.value;
+        const id = this.feedback.id;
         axios({
             method: 'DELETE',
             url: '/feedback/' + id
@@ -45,8 +44,9 @@ class AdminView extends Component {
         }).catch((error) => {
             alert('Unable to delete feedback!');
             console.log('Error in remove', error);
-        }); //end of DELETE
-    } //end of remove
+        })
+
+    } //end of removeFeedback
 
     toggleFlagFeedback = (feedback) => {
         console.log('flag', feedback);

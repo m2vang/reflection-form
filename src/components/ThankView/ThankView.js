@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../Header/Header.js';
+import Button from '@material-ui/core/Button';
 
 class ThankView extends Component {
 
@@ -13,10 +14,10 @@ class ThankView extends Component {
             <div>
                 <Header />
                 <div>
-                    Thank you!
+                    <h1>Thank You!</h1>
                 </div>
                 <div>
-                    <button onClick={this.restartFeedback}>Leave a new feedback</button>
+                    <Button variant="contained" color="primary" onClick={this.restartFeedback}>Leave a new feedback</Button>
                 </div>
             </div>
         ) //end of return

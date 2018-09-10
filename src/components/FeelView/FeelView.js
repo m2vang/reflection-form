@@ -44,7 +44,7 @@ class FeelView extends Component {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button size="large" className="nextPage" onClick={this.handleSubmit}>Next</Button>
+                        <Button variant="contained" color="primary" size="large" className="nextPage" onClick={this.handleSubmit}>Next</Button>
                     </CardActions>
                 </Card>
             </div>
