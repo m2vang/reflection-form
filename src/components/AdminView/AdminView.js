@@ -86,9 +86,7 @@ class AdminView extends Component {
                                             <TableCell>{feedback.support}</TableCell>
                                             <TableCell>{feedback.comments}</TableCell>
                                             <TableCell><Checkbox checked={feedback.flagged} onChange={this.toggleFlagFeedback(feedback)}></Checkbox></TableCell>
-                                            {/* <TableCell><Button variant="contained" color="secondary" onClick={this.removeFeedback}>Delete<DeleteIcon /></Button></TableCell> */}
-                                            <TableCell><Button onClick={() => showModal("Are you sure you want to delete this?")}></Button> 
-                                                <ConfirmModal message =" ``" onConfirm={onConfirm} onCancel={hideModal}></ConfirmModal></TableCell>
+                                            <TableCell><Button variant="contained" color="secondary" onClick={this.removeFeedback}>Delete<DeleteIcon /></Button></TableCell>
                                         </TableRow>
                                     ) //end of return
                                 })}
