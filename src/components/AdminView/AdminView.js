@@ -60,7 +60,6 @@ class AdminView extends Component {
     } //end of flagFeedback
 
     render() {
-        let{showModal, onConfirm, hideModal, feedback} = this.props
         return (
             <div>
                 <AdminHeader />
